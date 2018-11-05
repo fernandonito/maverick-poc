@@ -19,6 +19,9 @@ class TableRow extends Component {
           <td>
             {this.props.obj.status}
           </td>
+          <td>
+            <a href={'/delete/' + this.props.obj.id} class="button">Deletar</a>
+          </td>
         </tr>
     );
   }

@@ -4,37 +4,42 @@ import validator from 'validator';
 
 export default class PostPage extends React.Component {
   state = {
-    name: '',
-    username: '',
-    email: ''
+    name : "",
+    price: "",
+    text: "",
+    status : ""
   }
 
   handleNameChange = event => {
     this.setState({ name: event.target.value });
   }
 
-  handleUsernameChange = event => {
-    this.setState({ username: event.target.value });
+  handlePriceChange = event => {
+    this.setState({ price: event.target.value });
   }
 
-  handleEmailChange = event => {
-    this.setState({ email: event.target.value });
+  handleTextChange = event => {
+    this.setState({ text: event.target.value });
   }
+
+  handleStatusChange = event => {
+    this.setState({ status: event.target.value });
+  }
+
+
 
   handleSubmit = event => {
     event.preventDefault();
 
     const user = {
       name: this.state.name,
-      username: this.state.username,
-      email: this.state.email
+      price: this.state.price,
+      text: this.state.text,
+      status: this.state.status
     };
 
-    if(!validator.isEmail(this.state.email) && !validator.isEmpty(this.state.email)){
-      return alert('Email invalido');
-    }
 
-    axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
+    axios.post('http://symfony.localhost/empreendimento', { user })
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -55,16 +60,23 @@ export default class PostPage extends React.Component {
             </div>
 
             <div class="field">
-              <label class="label">Username</label>
+              <label class="label">Preço</label>
               <div class="control">
-                <input class="input" type="text" placeholder="Username" name="username" onChange={this.handleUsernameChange} />
+                <input class="input" type="text" placeholder="Preço" name="price" onChange={this.handlePriceChange} />
               </div>
             </div>
 
             <div class="field">
-              <label class="label">Email</label>
+              <label class="label">Text</label>
               <div class="control">
-                <input class="input" type="text" placeholder="Email" name="email" onChange={this.handleEmailChange} />
+                <input class="input" type="text" placeholder="Text" name="text" onChange={this.handleTextChange} />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Status</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Text" name="status" onChange={this.handleStatusChange} />
               </div>
             </div>
 

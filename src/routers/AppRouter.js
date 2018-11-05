@@ -6,6 +6,7 @@ import GetPage from '../components/GetPage';
 import GetPagination from '../components/GetPagination';
 import ContactPage from '../components/ContactPage';
 import NotFoundPage from '../components/NotFoundPage';
+import Delete from '../components/Delete';
 import Header from '../components/Header';
 
 const AppRouter = () => (
@@ -17,6 +18,7 @@ const AppRouter = () => (
                 <Route path="/get" component={GetPage} exact={true} />
                 <Route path="/get/:id" component={GetPagination} />
                 <Route path="/post" component={PostPage} exact={true} />
+                <Route path="/delete/:id" component={Delete} />
                 <Route path="/contact" component={ContactPage} />
                 <Route component={NotFoundPage} />
             </Switch>
