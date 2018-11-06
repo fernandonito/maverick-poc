@@ -7,9 +7,14 @@ class Edit extends Component {
     state = {
         persons: []
     }
+
+    headers = {
+        'Content-Type': 'application/json',
+        'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
+    }
     
     componentDidMount() {
-        axios.get(`http://symfony.localhost/empreendimento/${this.props.match.params.id}`)
+        axios.get(`http://symfony.localhost/empreendimento/${this.props.match.params.id}`, {headers: headers})
         //axios.get('http://maverick-api.localhost/get-id.php')
           .then(res => {
             const persons = res.data.empreendimento;

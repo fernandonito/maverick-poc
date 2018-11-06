@@ -3,8 +3,13 @@ import axios from 'axios';
 
 
 const Delete = (props) => {
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
+    }
     
-    axios.delete(`http://symfony.localhost/empreendimento/${props.match.params.id}`)
+    axios.delete(`http://symfony.localhost/empreendimento/${props.match.params.id}`, {headers: headers})
     //axios.delete(`https://jsonplaceholder.typicode.com/users/${props.match.params.id}`)
       .then(res => {
         console.log(res);

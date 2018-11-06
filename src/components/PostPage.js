@@ -38,8 +38,13 @@ export default class PostPage extends React.Component {
       status: this.state.status
     };
 
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
+    }
+
     //axios.post('http://symfony.localhost/empreendimento', { user })
-    axios.post(this.props.apiUrl, { user })
+    axios.post(this.props.apiUrl, { user }, {headers: headers})
       .then(res => {
         console.log(res);
         console.log(res.data);

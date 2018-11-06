@@ -9,7 +9,12 @@ export default class GetPage extends React.Component {
   
     componentDidMount() {
       //axios.get('http://symfony.localhost/empreendimento')
-      axios.get(this.props.apiUrl)
+      const headers = {
+          'Content-Type': 'application/json',
+          'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
+      }
+
+      axios.get(this.props.apiUrl, {headers: headers})
         .then(res => {
           const persons = res.data.empreendimento;
           this.setState({ persons });

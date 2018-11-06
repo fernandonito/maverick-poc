@@ -10,8 +10,9 @@ import Delete from '../components/Delete';
 import SearchPage from '../components/SearchPage';
 import Edit from '../components/Edit';
 import Header from '../components/Header';
+import Login from '../components/Login';
 
-const isSymfony = true;
+const isSymfony = false;
 
 const ApiUrl = 'http://symfony.localhost/empreendimento' ;
 const ApiUrlGetLista = (isSymfony === true ? ApiUrl : 'http://maverick-api.localhost/get-lista.php');
@@ -23,7 +24,8 @@ const AppRouter = () => (
         <div className="container">
             <Header />
             <Switch>
-                <Route path="/" component={DashboardPage} exact={true} />
+                <Route path="/" component={Login} exact={true} />
+                <Route path="/dashboard" component={DashboardPage} exact={true} />
                 <Route path="/get" component={() => <GetPage apiUrl={ApiUrlGetLista} />} exact={true} />
                 <Route path="/get/:id" component={GetPagination} />
                 <Route path="/post" component={() => <PostPage apiUrl={ApiUrlPost} />} exact={true} />
