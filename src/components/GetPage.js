@@ -9,7 +9,7 @@ export default class GetPage extends React.Component {
   
     componentDidMount() {
       //axios.get('http://symfony.localhost/empreendimento')
-      axios.get('http://maverick-api.localhost/get-lista.php')
+      axios.get(this.props.apiUrl)
         .then(res => {
           const persons = res.data.empreendimento;
           this.setState({ persons });

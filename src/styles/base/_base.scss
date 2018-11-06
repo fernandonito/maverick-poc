@@ -22,9 +22,9 @@ button:disabled{
     height: 300px;
 }
 
-.button.is-link{
+.button.is-link, .button.is-info{
     background-color: #01a58b;
 }
-.button.is-link:hover, .button.is-link.is-hovered {
+.button.is-link:hover, .button.is-link.is-hovered, .button.is-info:hover, .button.is-info.is-hovered {
     background-color: darken(#01a58b, 10%);
 }

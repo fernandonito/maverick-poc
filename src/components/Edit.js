@@ -9,12 +9,12 @@ class Edit extends Component {
     }
     
     componentDidMount() {
-        //axios.get(`http://symfony.localhost/empreendimento/${this.props.match.params.id}`)
-        axios.get('http://maverick-api.localhost/get-id.php')
+        axios.get(`http://symfony.localhost/empreendimento/${this.props.match.params.id}`)
+        //axios.get('http://maverick-api.localhost/get-id.php')
           .then(res => {
             const persons = res.data.empreendimento;
             this.setState({ persons });
-            console.log(persons);
+            //console.log(persons);
           })
     }
 
@@ -31,7 +31,6 @@ class Edit extends Component {
             <p>Value with id: {this.props.match.params.id}</p>
             {this.editForm()}
         </div>
-          
       );
     }
 }
