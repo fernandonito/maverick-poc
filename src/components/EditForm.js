@@ -32,7 +32,7 @@ class EditForm extends Component {
       handleSubmit = event => {
         event.preventDefault();
     
-        //axios.put('http://symfony.localhost/empreendimento/', { user })
+        //axios.put('http://symfony.localhost/empreendimento', { 
         axios.put('https://jsonplaceholder.typicode.com/posts/1', { 
             id: this.state.id,
             name: this.state.name,
