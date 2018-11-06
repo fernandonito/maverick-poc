@@ -4,10 +4,11 @@ import axios from 'axios';
 class EditForm extends Component {
 
     state = {
-        name : "",
-        price: "",
-        text: "",
-        status : ""
+        id: this.props.obj.id,
+        name: this.props.obj.name,
+        price: this.props.obj.price,
+        text: this.props.obj.text,
+        status: this.props.obj.status
       }
     
       handleNameChange = event => {
@@ -31,15 +32,14 @@ class EditForm extends Component {
       handleSubmit = event => {
         event.preventDefault();
     
-        const user = {
-          name: this.state.name,
-          price: this.state.price,
-          text: this.state.text,
-          status: this.state.status
-        };
-    
         //axios.put('http://symfony.localhost/empreendimento/', { user })
-        axios.put('https://jsonplaceholder.typicode.com/posts/1', { user })
+        axios.put('https://jsonplaceholder.typicode.com/posts/1', { 
+            id: this.state.id,
+            name: this.state.name,
+            price: this.state.price,
+            text: this.state.text,
+            status: this.state.status
+         })
           .then(res => {
             console.log(res);
             console.log(res.data);

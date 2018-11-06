@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {NavLink} from 'react-router-dom';
 
 class TableRow extends Component {
   render() {
@@ -20,10 +21,10 @@ class TableRow extends Component {
             {this.props.obj.status}
           </td>
           <td>
-            <a href={'/edit/' + this.props.obj.id} class="button">Editar</a>
+            <NavLink to={'/edit/' + this.props.obj.id} className="button" >Editar</NavLink>
           </td>
           <td>
-            <a href={'/delete/' + this.props.obj.id} class="button">Deletar</a>
+          <NavLink to={'/delete/' + this.props.obj.id} className="button" >Deletar</NavLink>
           </td>
         </tr>
     );
