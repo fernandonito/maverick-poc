@@ -25,19 +25,18 @@ class Login extends React.Component {
     event.preventDefault();
 
 
-    //axios.post('http://symfony.localhost/empreendimento', { user })
-    axios.post('https://jsonplaceholder.typicode.com/users', { username: this.state.username, password: this.state.password })
+    axios.post('http://symfony.localhost/login', { username: this.state.username, password: this.state.password })
       .then(res => {
         console.log(res);
-        console.log(res.data);
-        if(res.token-response===false){
+        console.log(res.data.tokenResponse);
+        if(res.data.tokenResponse===false){
             alert('Login Invalido');
         }else{
-            this.setState({ token: res.token-response.api_token });
+            this.setState({ token: res.data.tokenResponse.api_token });
             //this.setState({ token: 'maverick-token' });
             const json = JSON.stringify(this.state.token);
             localStorage.setItem('token', json);
-            windows.location("/dashboard");
+            window.location("/dashboard");
             console.log('redireciona');
         }
       })

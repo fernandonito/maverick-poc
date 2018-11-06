@@ -12,7 +12,7 @@ import Edit from '../components/Edit';
 import Header from '../components/Header';
 import Login from '../components/Login';
 
-const isSymfony = false;
+const isSymfony = true;
 
 const ApiUrl = 'http://symfony.localhost/empreendimento' ;
 const ApiUrlGetLista = (isSymfony === true ? ApiUrl : 'http://maverick-api.localhost/get-lista.php');
