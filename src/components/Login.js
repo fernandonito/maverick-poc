@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect, browserHistory } from 'react-router';
 
 class Login extends React.Component {
 
@@ -7,7 +8,8 @@ class Login extends React.Component {
     super(props);
     this.state = { 
         username: '',
-        password: ''
+        password: '',
+        token: ''
     };
   }
 
@@ -24,50 +26,61 @@ class Login extends React.Component {
 
 
     //axios.post('http://symfony.localhost/empreendimento', { user })
-    axios.post('http://symfony.localhost/login', { username: this.state.username, password: this.state.password })
+    axios.post('https://jsonplaceholder.typicode.com/users', { username: this.state.username, password: this.state.password })
       .then(res => {
         console.log(res);
         console.log(res.data);
-        if(res.status===200){
-            alert('logado');
+        if(res.token-response===false){
+            alert('Login Invalido');
         }else{
-            alert('login invalido');
+            this.setState({ token: res.token-response.api_token });
+            //this.setState({ token: 'maverick-token' });
+            const json = JSON.stringify(this.state.token);
+            localStorage.setItem('token', json);
+            windows.location("/dashboard");
+            console.log('redireciona');
         }
       })
   }
 
   render() {
-    return (
+    const json = localStorage.getItem('token');
+    const logged = JSON.parse(json);
+    if(logged){
+      return <Redirect to='/dashboard' />
+    }else{
+        return (
 
-        <div className="columns">
-            <div class="column is-two-fifths">
-                <h1 class="title">Login</h1>
-                <form onSubmit={this.handleLogin}>
+            <div className="columns">
+                <div class="column is-two-fifths">
+                    <h1 class="title">Login</h1>
+                    <form onSubmit={this.handleLogin}>
 
-                    <div class="field">
-                    <label class="label">Username</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Username" name="username" onChange={this.handleUsernameChange} />
-                    </div>
-                    </div>
+                        <div class="field">
+                        <label class="label">Username</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Username" name="username" onChange={this.handleUsernameChange} />
+                        </div>
+                        </div>
 
-                    <div class="field">
-                    <label class="label">Senha</label>
-                    <div class="control">
-                        <input class="input" type="password" placeholder="Senha" name="password" onChange={this.handlePasswordChange} />
-                    </div>
-                    </div>
+                        <div class="field">
+                        <label class="label">Senha</label>
+                        <div class="control">
+                            <input class="input" type="password" placeholder="Senha" name="password" onChange={this.handlePasswordChange} />
+                        </div>
+                        </div>
 
-                    <div class="field is-grouped">
-                    <div class="control">
-                        <button type="submit" class="button is-link">Login</button>
-                    </div>
-                    </div>
+                        <div class="field is-grouped">
+                        <div class="control">
+                            <button type="submit" class="button is-link">Login</button>
+                        </div>
+                        </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import TableRow from './TableRow';
-
+import { Redirect } from 'react-router';
 export default class GetPage extends React.Component {
     state = {
       persons: []
@@ -29,25 +29,31 @@ export default class GetPage extends React.Component {
     }
   
     render() {
-      return (
-        
-            <table className="table">
-              <thead>
-                <tr>
-                  <td>ID</td>
-                  <td>Nome</td>
-                  <td>Preço</td>
-                  <td>Texto</td>
-                  <td>Status</td>
-                  <td>Editar</td>
-                  <td>Deletar</td>
-                </tr>
-              </thead>
-              <tbody>
-                {this.tabRow()}
-              </tbody>
-            </table>
-      );
+      const json = localStorage.getItem('token');
+      const logged = JSON.parse(json);
+      if(!logged){
+        return <Redirect to='/' />
+      }else{
+        return (
+          
+              <table className="table">
+                <thead>
+                  <tr>
+                    <td>ID</td>
+                    <td>Nome</td>
+                    <td>Preço</td>
+                    <td>Texto</td>
+                    <td>Status</td>
+                    <td>Editar</td>
+                    <td>Deletar</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.tabRow()}
+                </tbody>
+              </table>
+        );
+      }
     }
   }
   

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch, NavLink} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, NavLink, Redirect} from 'react-router-dom';
 import DashboardPage from '../components/DashboardPage';
 import PostPage from '../components/PostPage';
 import GetPage from '../components/GetPage';

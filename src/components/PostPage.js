@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import validator from 'validator';
+import { Redirect } from 'react-router';
 
 export default class PostPage extends React.Component {
   state = {
@@ -52,7 +53,12 @@ export default class PostPage extends React.Component {
   }
 
   render() {
-    return (
+    const json = localStorage.getItem('token');
+    const logged = JSON.parse(json);
+    if(!logged){
+      return <Redirect to='/' />
+    }else{
+      return (
       <div className="columns">
         <div class="column is-two-fifths">
           <form onSubmit={this.handleSubmit}>
@@ -94,6 +100,7 @@ export default class PostPage extends React.Component {
           </form>
           </div>
       </div>
-    )
+      );
+    }
   }
 }

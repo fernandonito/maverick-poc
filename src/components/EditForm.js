@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router';
 
 class EditForm extends Component {
 
@@ -52,49 +53,55 @@ class EditForm extends Component {
       }
 
   render() {
-    return (
-        <div className="columns">
-            <div class="column is-two-fifths">
-            <form onSubmit={this.handleSubmit}>
+    const json = localStorage.getItem('token');
+    const logged = JSON.parse(json);
+    if(!logged){
+      return <Redirect to='/' />
+    }else{
+        return (
+            <div className="columns">
+                <div class="column is-two-fifths">
+                <form onSubmit={this.handleSubmit}>
 
-                <div class="field">
-                <label class="label">Nome</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Nome" name="name" defaultValue={this.props.obj.nome} onChange={this.handleNameChange} />
-                </div>
-                </div>
+                    <div class="field">
+                    <label class="label">Nome</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Nome" name="name" defaultValue={this.props.obj.nome} onChange={this.handleNameChange} />
+                    </div>
+                    </div>
 
-                <div class="field">
-                <label class="label">Preço</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Preço" name="price" defaultValue={this.props.obj.price} onChange={this.handlePriceChange} />
-                </div>
-                </div>
+                    <div class="field">
+                    <label class="label">Preço</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Preço" name="price" defaultValue={this.props.obj.price} onChange={this.handlePriceChange} />
+                    </div>
+                    </div>
 
-                <div class="field">
-                <label class="label">Text</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Text" name="text" defaultValue={this.props.obj.text} onChange={this.handleTextChange} />
-                </div>
-                </div>
+                    <div class="field">
+                    <label class="label">Text</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Text" name="text" defaultValue={this.props.obj.text} onChange={this.handleTextChange} />
+                    </div>
+                    </div>
 
-                <div class="field">
-                <label class="label">Status</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Text" name="status" defaultValue={this.props.obj.status} onChange={this.handleStatusChange} />
-                </div>
-                </div>
+                    <div class="field">
+                    <label class="label">Status</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Text" name="status" defaultValue={this.props.obj.status} onChange={this.handleStatusChange} />
+                    </div>
+                    </div>
 
-                <div class="field is-grouped">
-                <div class="control">
-                    <button type="submit" class="button is-link">Submit</button>
-                </div>
-                </div>
+                    <div class="field is-grouped">
+                    <div class="control">
+                        <button type="submit" class="button is-link">Submit</button>
+                    </div>
+                    </div>
 
-            </form>
+                </form>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
   }
 }
 

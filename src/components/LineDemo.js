@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import { Line } from 'react-chartjs-2';
+import { Redirect } from 'react-router';
+
+const json = localStorage.getItem('token');
+const logged = JSON.parse(json);
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -30,15 +34,19 @@ const data = {
 
 export default class LineDemo extends Component {
   render() {
-    return (
-      <div className="maverick-chart">
-        <Line ref="chart" data={data} width={50}
-    height={50}
-    options={{
-        maintainAspectRatio: false
-    }} />
-      </div>
-    );
+    if(!logged){
+        return <Redirect to='/' />
+    }else{
+      return (
+        <div className="maverick-chart">
+          <Line ref="chart" data={data} width={50}
+      height={50}
+      options={{
+          maintainAspectRatio: false
+      }} />
+        </div>
+      );
+    }
   }
 
   componentDidMount() {

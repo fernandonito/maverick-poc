@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import EditForm from './EditForm';
-
+import { Redirect } from 'react-router';
 class Edit extends Component {
 
     state = {
@@ -30,13 +30,19 @@ class Edit extends Component {
     }
 
     render() {
-      return (
-        <div>
-            <h1>Edit page</h1>
-            <p>Value with id: {this.props.match.params.id}</p>
-            {this.editForm()}
-        </div>
-      );
+        const json = localStorage.getItem('token');
+      const logged = JSON.parse(json);
+      if(!logged){
+        return <Redirect to='/' />
+      }else{
+        return (
+            <div>
+                <h1>Edit page</h1>
+                <p>Value with id: {this.props.match.params.id}</p>
+                {this.editForm()}
+            </div>
+        );
+      }
     }
 }
   
