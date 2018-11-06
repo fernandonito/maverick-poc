@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import TableRow from './TableRow';
 export default class SearchPage extends React.Component {
   state = {
     name : '',
@@ -23,16 +23,21 @@ export default class SearchPage extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    //axios.post('http://symfony.localhost/empreendimento', { user })
     axios.post(this.props.apiUrl, { name: this.state.name })
       .then(res => {
         console.log(res);
         console.log(res.data);
         this.setState({ status: res.status });
-        if(res.empreendimento){
-          this.setState({ empreendimento: res.empreendimento });
+        if(res.data.empreendimento){
+          this.setState({ empreendimento: res.data.empreendimento });
         }
       })
+  }
+
+  tabRow(){
+      return this.state.empreendimento.map(function(object, i){
+          return <TableRow obj={object} key={i} />;
+      });
   }
 
   render() {
@@ -50,12 +55,8 @@ export default class SearchPage extends React.Component {
                 </div>
             </div>
 
-            {this.state.status && <p>Status da resposta: {this.state.status}</p>}
-            {this.state.empreendimento.id && <p>ID: {this.state.empreendimento.id}</p>}
-            {this.state.empreendimento.nome && <p>Nome: {this.state.empreendimento.nome}</p>}
-            {this.state.empreendimento.price && <p>Price: {this.state.empreendimento.price}</p>}
-            {this.state.empreendimento.text && <p>Text: {this.state.empreendimento.text}</p>}
-            {this.state.empreendimento.status && <p>Status: {this.state.empreendimento.status}</p>}
+
+            { this.state.status===200 && <div><p>Status da resposta: {this.state.status}</p><table className="table"> <thead> <tr> <td>ID</td><td>Nome</td><td>Preço</td><td>Texto</td><td>Status</td><td>Editar</td><td>Deletar</td></tr></thead> <tbody>{this.tabRow()}</tbody> </table></div> }
 
           </form>
           </div>

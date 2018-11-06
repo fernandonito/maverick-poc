@@ -16,7 +16,7 @@ const isSymfony = true;
 const ApiUrl = 'http://symfony.localhost/empreendimento' ;
 const ApiUrlGetLista = (isSymfony === true ? ApiUrl : 'http://maverick-api.localhost/get-lista.php');
 const ApiUrlPost = (isSymfony === true ? ApiUrl : 'https://jsonplaceholder.typicode.com/users');
-const ApiUrlSearch = (isSymfony === true ? ApiUrl : 'https://jsonplaceholder.typicode.com/users');
+const ApiUrlSearch = (isSymfony === true ? ApiUrl+'/search' : 'http://maverick-api.localhost/get-search.php');
 
 const AppRouter = () => (
     <BrowserRouter>
