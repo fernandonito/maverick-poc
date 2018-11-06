@@ -38,8 +38,8 @@ export default class PostPage extends React.Component {
       status: this.state.status
     };
 
-
-    axios.post('http://symfony.localhost/empreendimento', { user })
+    //axios.post('http://symfony.localhost/empreendimento', { user })
+    axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
       .then(res => {
         console.log(res);
         console.log(res.data);

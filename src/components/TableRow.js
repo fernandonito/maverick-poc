@@ -20,6 +20,9 @@ class TableRow extends Component {
             {this.props.obj.status}
           </td>
           <td>
+            <a href={'/edit/' + this.props.obj.id} class="button">Editar</a>
+          </td>
+          <td>
             <a href={'/delete/' + this.props.obj.id} class="button">Deletar</a>
           </td>
         </tr>

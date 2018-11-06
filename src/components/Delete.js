@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const Delete = (props) => {
     
+    //axios.delete(`http://symfony.localhost/empreendimento/${props.match.params.id}`)
     axios.delete(`https://jsonplaceholder.typicode.com/users/${props.match.params.id}`)
       .then(res => {
         console.log(res);

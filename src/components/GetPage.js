@@ -8,7 +8,8 @@ export default class GetPage extends React.Component {
     }
   
     componentDidMount() {
-      axios.get('http://symfony.localhost/empreendimento')
+      //axios.get('http://symfony.localhost/empreendimento')
+      axios.get('http://maverick-api.localhost/get-lista.php')
         .then(res => {
           const persons = res.data.empreendimento;
           this.setState({ persons });
@@ -33,6 +34,8 @@ export default class GetPage extends React.Component {
                   <td>Preço</td>
                   <td>Texto</td>
                   <td>Status</td>
+                  <td>Editar</td>
+                  <td>Deletar</td>
                 </tr>
               </thead>
               <tbody>
