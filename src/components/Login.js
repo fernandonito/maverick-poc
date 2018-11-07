@@ -10,7 +10,8 @@ class Login extends React.Component {
     this.state = { 
         username: '',
         password: '',
-        token: ''
+        token: '',
+        redirect: false
     };
   }
 
@@ -38,13 +39,20 @@ class Login extends React.Component {
             const json = JSON.stringify(this.state.token);
             localStorage.setItem('token', json);
             //window.location("/dashboard");
-            history.push('/dashboard');
+            this.setState({ redirect: true });
             console.log('redireciona');
         }
       });
   }
 
   render() {
+
+    if (this.state.redirect) {
+        return (
+          <Redirect to='/dashboard'/>
+        )
+    }
+
     const json = localStorage.getItem('token');
     const logged = JSON.parse(json);
     if(logged){

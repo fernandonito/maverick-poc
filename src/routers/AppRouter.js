@@ -25,17 +25,13 @@ const AppRouter = () => (
         <div className="container">
             <Header />
             <Switch>
-                <Router history={history}>
                     <Route path="/" component={Login} exact={true} />
-                </Router>
                     <Route path="/dashboard" component={DashboardPage} exact={true} />
                     <Route path="/get" component={() => <GetPage apiUrl={ApiUrlGetLista} />} exact={true} />
                     <Route path="/get/:id" component={GetPagination} />
                     <Route path="/post" component={() => <PostPage apiUrl={ApiUrlPost} />} exact={true} />
                     <Route path="/delete/:id" component={Delete} />
-                <Router history={history}>
                     <Route path="/edit/:id" component={Edit} />
-                </Router>
                     <Route path="/search" component={() => <SearchPage apiUrl={ApiUrlSearch} />} />
                     <Route path="/contact" component={ContactPage} />
                     <Route component={NotFoundPage} />

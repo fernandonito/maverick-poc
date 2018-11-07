@@ -13,13 +13,15 @@ class Edit extends Component {
     }
     
     componentDidMount() {
+        let token = JSON.parse(localStorage.getItem('token'));
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-MAVERICK-AUTH-TOKEN': ''+token+'' 
+        }
         if(!this.logged){
             return <Redirect to='/' />
         }else{
-            axios.get(`http://symfony.localhost/empreendimento/${this.props.match.params.id}`, {headers: {
-                'Content-Type': 'application/json',
-                'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
-            }})
+            axios.get(`http://symfony.localhost/empreendimento/${this.props.match.params.id}`, {headers: headers})
             //axios.get('http://maverick-api.localhost/get-id.php')
             .then(res => {
                 const persons = res.data.empreendimento;

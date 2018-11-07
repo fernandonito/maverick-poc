@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import validator from 'validator';
-import { Redirect } from 'react-router';
+import history from './history';
+import { Redirect } from 'react-router-dom'
 
 export default class PostPage extends React.Component {
   state = {
@@ -38,17 +39,16 @@ export default class PostPage extends React.Component {
       text: this.state.text,
       status: this.state.status
     };
+    
+    let token = JSON.parse(localStorage.getItem('token'));
+      const headers = {
+          'Content-Type': 'application/json',
+          'X-MAVERICK-AUTH-TOKEN': ''+token+'' 
+      }
 
-    const headers = {
-        'Content-Type': 'application/json',
-        'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
-    }
-
-    //axios.post('http://symfony.localhost/empreendimento', { user })
     axios.post(this.props.apiUrl, { user }, {headers: headers})
       .then(res => {
-        console.log(res);
-        console.log(res.data);
+        return <Redirect to='/get' />
       })
   }
 

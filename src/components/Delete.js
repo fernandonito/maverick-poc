@@ -11,9 +11,10 @@ const Delete = (props) => {
         return <Redirect to='/' />
     }else{
 
+        let token = JSON.parse(localStorage.getItem('token'));
         const headers = {
-            'Content-Type': 'application/json',
-            'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
+          'Content-Type': 'application/json',
+          'X-MAVERICK-AUTH-TOKEN': ''+token+'' 
         }
         
         axios.delete(`http://symfony.localhost/empreendimento/${props.match.params.id}`, {headers: headers})

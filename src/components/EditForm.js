@@ -10,7 +10,8 @@ class EditForm extends Component {
         name: this.props.obj.name,
         price: this.props.obj.price,
         text: this.props.obj.text,
-        status: this.props.obj.status
+        status: this.props.obj.status,
+        redirect: false
       }
     
       handleNameChange = event => {
@@ -33,7 +34,13 @@ class EditForm extends Component {
     
       handleSubmit = event => {
         event.preventDefault();
-    
+        
+        let token = JSON.parse(localStorage.getItem('token'));
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-MAVERICK-AUTH-TOKEN': ''+token+'' 
+        }
+
         axios.put('http://symfony.localhost/empreendimento', { 
         //axios.put('https://jsonplaceholder.typicode.com/posts/1', { 
             id: this.state.id,
@@ -41,18 +48,22 @@ class EditForm extends Component {
             price: this.state.price,
             text: this.state.text,
             status: this.state.status
-         }, {headers: {
-            'Content-Type': 'application/json',
-            'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
-        }})
+         }, {headers: headers})
           .then(res => {
             console.log(res);
             console.log(res.data);
-            history.push('/get');
+            this.setState({ redirect: true });
           })
       }
 
   render() {
+
+    if (this.state.redirect) {
+        return (
+          <Redirect to='/get'/>
+        )
+    }
+
     const json = localStorage.getItem('token');
     const logged = JSON.parse(json);
     if(!logged){
