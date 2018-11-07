@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect, browserHistory } from 'react-router';
+import history from './history';
 
 class Login extends React.Component {
 
@@ -36,7 +37,8 @@ class Login extends React.Component {
             //this.setState({ token: 'maverick-token' });
             const json = JSON.stringify(this.state.token);
             localStorage.setItem('token', json);
-            window.location("/dashboard");
+            //window.location("/dashboard");
+            history.push('/dashboard');
             console.log('redireciona');
         }
       });

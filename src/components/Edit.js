@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import EditForm from './EditForm';
 import { Redirect } from 'react-router';
+
 class Edit extends Component {
 
     json = localStorage.getItem('token');

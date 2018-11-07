@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import history from './history';
 
 class EditForm extends Component {
 
@@ -47,6 +48,7 @@ class EditForm extends Component {
           .then(res => {
             console.log(res);
             console.log(res.data);
+            history.push('/get');
           })
       }
 
