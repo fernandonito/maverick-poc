@@ -4,23 +4,28 @@ import EditForm from './EditForm';
 import { Redirect } from 'react-router';
 class Edit extends Component {
 
+    json = localStorage.getItem('token');
+    logged = JSON.parse(this.json);
+
     state = {
         persons: []
     }
-
-    headers = {
-        'Content-Type': 'application/json',
-        'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
-    }
     
     componentDidMount() {
-        axios.get(`http://symfony.localhost/empreendimento/${this.props.match.params.id}`, {headers: headers})
-        //axios.get('http://maverick-api.localhost/get-id.php')
-          .then(res => {
-            const persons = res.data.empreendimento;
-            this.setState({ persons });
-            //console.log(persons);
-          })
+        if(!this.logged){
+            return <Redirect to='/' />
+        }else{
+            axios.get(`http://symfony.localhost/empreendimento/${this.props.match.params.id}`, {headers: {
+                'Content-Type': 'application/json',
+                'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
+            }})
+            //axios.get('http://maverick-api.localhost/get-id.php')
+            .then(res => {
+                const persons = res.data.empreendimento;
+                this.setState({ persons });
+                //console.log(persons);
+            })
+        }
     }
 
     editForm(){
@@ -30,9 +35,7 @@ class Edit extends Component {
     }
 
     render() {
-        const json = localStorage.getItem('token');
-      const logged = JSON.parse(json);
-      if(!logged){
+      if(!this.logged){
         return <Redirect to='/' />
       }else{
         return (

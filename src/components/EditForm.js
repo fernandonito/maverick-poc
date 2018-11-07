@@ -32,11 +32,6 @@ class EditForm extends Component {
     
       handleSubmit = event => {
         event.preventDefault();
-
-        headers = {
-            'Content-Type': 'application/json',
-            'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
-        }
     
         //axios.put('http://symfony.localhost/empreendimento', { 
         axios.put('https://jsonplaceholder.typicode.com/posts/1', { 
@@ -45,7 +40,10 @@ class EditForm extends Component {
             price: this.state.price,
             text: this.state.text,
             status: this.state.status
-         }, {headers: headers})
+         }, {headers: {
+            'Content-Type': 'application/json',
+            'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
+        }})
           .then(res => {
             console.log(res);
             console.log(res.data);
