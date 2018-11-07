@@ -25,12 +25,10 @@ export default class SearchPage extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    headers = {
-        'Content-Type': 'application/json',
-        'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
-    }
-
-    axios.post(this.props.apiUrl, { name: this.state.name }, {headers: headers})
+    axios.post(this.props.apiUrl, { name: this.state.name }, {headers: {
+      'Content-Type': 'application/json',
+      'X-MAVERICK-AUTH-TOKEN': 'meu-token-secreto-encriptado' 
+  }})
       .then(res => {
         console.log(res);
         console.log(res.data);

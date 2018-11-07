@@ -39,7 +39,7 @@ class Login extends React.Component {
             window.location("/dashboard");
             console.log('redireciona');
         }
-      })
+      });
   }
 
   render() {
